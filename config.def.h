@@ -32,9 +32,12 @@ static const char *colors[][3] = {
 
 /* autostart applications */
 static const char *const autostart[] = {
-    "setxkbmap", "latam", "ldvd", NULL, "udiskie", NULL, "sh", "-c",
-    "conky -c /home/walter/.config/conky/conky.lua | dwmstatus", NULL,
+    "setxkbmap", "latam", "ldvd", NULL,
+    "udiskie", NULL,
+    "sh", "-c", "conky -c /home/walter/.config/conky/conky.lua | dwmstatus", NULL,
     "xautolock", "-time", "600", "-locker", "xtrlock", NULL,
+    "xrandr", "--output", "DP1", "--mode", "1920x1080", "--pos", "0x0", "--rotate", "normal", "--output", "HDMI1", "--primary", "--mode", "1920x1080", "--pos", "1920x0", "--rotate", "normal", NULL,
+    "feh", "--bg-scale", "~/.config/wallpapers/wall.jpg", NULL,
     // "picom", NULL,
     // "sh", "-c", "/home/walter/.config/suckless/pantalla.sh", NULL,
     /* "blueberry", NULL, */
@@ -90,16 +93,13 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = {"dmenu_run", "-fn", dmenufont, "-nb",
                                  col_gray1,   "-nf", col_gray3, "-sb",
                                  col_cyan,    "-sf", col_gray4, NULL};
-static const char *roficmd[] = {
-    "/home/walter/.dwm/rofi/launchers/type-3/launcher.sh", NULL};
-static const char *powercmd[] = {
-    "/home/walter/.dwm/rofi/powermenu/type-4/powermenu.sh", NULL};
-static const char *termcmd[] = {"wezterm", NULL};
+/* static const char *roficmd[] = { "/home/walter/.dwm/rofi/launchers/type-3/launcher.sh", NULL}; */
+static const char *powercmd[] = { "/home/walter/.config/wscripts/powermenu", NULL};
+static const char *termcmd[] = {"st", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_p, spawn, {.v = dmenucmd}},
-    {MODKEY, XK_m, spawn, {.v = roficmd}},
     {MODKEY, XK_x, spawn, {.v = powercmd}},
     {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_b, togglebar, {0}},
@@ -123,9 +123,9 @@ static const Key keys[] = {
     {MODKEY, XK_period, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
-    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
-        TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
-            TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
+    TAGKEYS(XK_ampersand, 0) TAGKEYS(XK_bracketleft, 1) TAGKEYS(XK_braceleft, 2) TAGKEYS(XK_parenleft, 3)
+        TAGKEYS(XK_less, 4) TAGKEYS(XK_greater, 5) TAGKEYS(XK_parenright, 6) TAGKEYS(XK_bracketright, 7)
+            TAGKEYS(XK_bracketright, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
 };
 
 /* button definitions */
