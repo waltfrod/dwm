@@ -1,0 +1,16 @@
+#!/bin/bash
+
+Options="Cancelar\nBloquear Pantalla\nSalir\nApagar\nReiniciar"
+
+function powermenu() {
+    choice=$(echo -e $Options | dmenu -i -p 'Menú de Salida' -fn 'Iosevka Term Slab:style=Medium:size=11:antialias=true:autohint=true' -nb '#ffcfcf' -nf '#222222' -sb '#ff0e0e' -sf '#ffffff')
+    case $choice in
+        "Cancelar") exit 0;;
+        "Bloquear Pantalla") xtrlock;;
+        "Salir") exit 0;;
+        "Apagar") sudo poweroff;;
+        "Reiniciar") sudo reboot;;
+    esac
+}
+
+powermenu

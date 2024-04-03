@@ -98,8 +98,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = {"dmenu_run", "-fn", dmenufont, "-nb",
                                  col_gray1,   "-nf", col_gray3, "-sb",
                                  col_cyan,    "-sf", col_gray4, NULL};
-/* static const char *roficmd[] = { "/home/walter/.dwm/rofi/launchers/type-3/launcher.sh", NULL}; */
-static const char *powercmd[] = { "/home/walter/.config/wscripts/powermenu", NULL};
+static const char *powercmd[] = { "/home/walter/.config/script/powermenu", NULL};
 static const char *termcmd[] = {"st", NULL};
 static const char *nemocmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"google-chrome-stable", NULL};

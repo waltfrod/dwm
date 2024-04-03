@@ -54,6 +54,8 @@ install: all
 	mv -v dwmstatus /usr/local/bin/dwmstatus
 	mv -v clipnotify /usr/local/bin/clipnotify
 	cp -v clipmenu/* /usr/local/bin/
+	mkdir -p /home/walter/.config/script
+	cp -v scripts/powermenu /home/walter/.config/script/
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
