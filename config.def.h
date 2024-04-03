@@ -73,6 +73,8 @@ static const Layout layouts[] = {
     {"[T]", tile}, /* first entry is default */
     {"[N]", NULL}, /* no layout function means floating behavior */
     {"[M]", monocle},
+    {"TTT", bstack},
+    {"===", bstackhoriz},
 };
 
 /* key definitions */
@@ -96,12 +98,13 @@ static const char *dmenucmd[] = {"dmenu_run", "-fn", dmenufont, "-nb",
 /* static const char *roficmd[] = { "/home/walter/.dwm/rofi/launchers/type-3/launcher.sh", NULL}; */
 static const char *powercmd[] = { "/home/walter/.config/wscripts/powermenu", NULL};
 static const char *termcmd[] = {"st", NULL};
+static const char *browsercmd[] = {"google-chrome-stable", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
-    {MODKEY, XK_p, spawn, {.v = dmenucmd}},
+    {MODKEY, XK_r, spawn, {.v = dmenucmd}},
     {MODKEY, XK_x, spawn, {.v = powercmd}},
-    {MODKEY | ShiftMask, XK_Return, spawn, {.v = termcmd}},
+    {MODKEY, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_b, togglebar, {0}},
     {MODKEY, XK_j, focusstack, {.i = +1}},
     {MODKEY, XK_k, focusstack, {.i = -1}},
@@ -109,16 +112,18 @@ static const Key keys[] = {
     {MODKEY, XK_d, incnmaster, {.i = -1}},
     {MODKEY, XK_h, setmfact, {.f = -0.05}},
     {MODKEY, XK_l, setmfact, {.f = +0.05}},
-    {MODKEY, XK_Return, zoom, {0}},
-    {MODKEY, XK_Tab, view, {0}},
+    {MODKEY, XK_s, zoom, {0}},
+    /* {MODKEY, XK_Tab, view, {0}}, */
     {MODKEY | ShiftMask, XK_c, killclient, {0}},
-    {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
-    {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},
-    {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
+    {MODKEY, XK_t, setlayout, {.v = &layouts[0]}}, // Tile
+    {MODKEY, XK_f, setlayout, {.v = &layouts[1]}}, // NULL
+    {MODKEY, XK_m, setlayout, {.v = &layouts[2]}}, // Monocle
+    {MODKEY, XK_u, setlayout, {.v = &layouts[3]}}, // Bottom Stack
+    {MODKEY, XK_o, setlayout, {.v = &layouts[4]}}, // Bottom Stack Horizontal
     {MODKEY, XK_space, setlayout, {0}},
     {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
-    {MODKEY, XK_0, view, {.ui = ~0}},
-    {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}},
+    /* {MODKEY, XK_0, view, {.ui = ~0}}, */
+    /* {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}}, */
     {MODKEY, XK_comma, focusmon, {.i = -1}},
     {MODKEY, XK_period, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
