@@ -268,6 +268,7 @@ static void bstack(Monitor *m);
 static void bstackhoriz(Monitor *m);
 static void centeredmaster(Monitor *m);
 static void centeredfloatingmaster(Monitor *m);
+static void cyclelayout(const Arg *arg);
 static void autostart_exec(void);
 
 /* variables */
@@ -2749,5 +2750,22 @@ centeredfloatingmaster(Monitor *m)
 		resize(c, m->wx + tx, m->wy, w - (2*c->bw),
 		       m->wh - (2*c->bw), 0);
 		tx += WIDTH(c);
+	}
+}
+
+void
+cyclelayout(const Arg *arg) {
+	Layout *l;
+	for(l = (Layout *)layouts; l != selmon->lt[selmon->sellt]; l++);
+	if(arg->i > 0) {
+		if(l->symbol && (l + 1)->symbol)
+			setlayout(&((Arg) { .v = (l + 1) }));
+		else
+			setlayout(&((Arg) { .v = layouts }));
+	} else {
+		if(l != layouts && (l - 1)->symbol)
+			setlayout(&((Arg) { .v = (l - 1) }));
+		else
+			setlayout(&((Arg) { .v = &layouts[LENGTH(layouts) - 2] }));
 	}
 }

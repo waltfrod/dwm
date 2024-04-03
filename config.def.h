@@ -77,6 +77,7 @@ static const Layout layouts[] = {
     {"===", bstackhoriz},
     {"|C|", centeredmaster},
     {"(C)", centeredfloatingmaster},
+    {NULL, NULL},
 };
 
 /* key definitions */
@@ -132,6 +133,8 @@ static const Key keys[] = {
     {MODKEY, XK_period, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
+    {MODKEY | ControlMask, XK_comma, cyclelayout, {.i = -1}},
+    {MODKEY | ControlMask, XK_period, cyclelayout, {.i = +1}},
     TAGKEYS(XK_ampersand, 0) TAGKEYS(XK_bracketleft, 1) TAGKEYS(XK_braceleft, 2) TAGKEYS(XK_parenleft, 3)
         TAGKEYS(XK_less, 4) TAGKEYS(XK_greater, 5) TAGKEYS(XK_parenright, 6) TAGKEYS(XK_bracketright, 7)
             TAGKEYS(XK_bracketright, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
