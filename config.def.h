@@ -38,7 +38,7 @@ static const char *const autostart[] = {
     "xautolock", "-time", "600", "-locker", "xtrlock", NULL,
     "xrandr", "--output", "DP1", "--mode", "1920x1080", "--pos", "0x0", "--rotate", "normal", "--output", "HDMI1", "--primary", "--mode", "1920x1080", "--pos", "1920x0", "--rotate", "normal", NULL,
     "feh", "--bg-scale", "~/.config/wallpapers/wall.jpg", NULL,
-    // "picom", NULL,
+    "clipmenud", NULL,
     // "sh", "-c", "/home/walter/.config/suckless/pantalla.sh", NULL,
     /* "blueberry", NULL, */
     NULL /* terminate */
@@ -101,13 +101,20 @@ static const char *dmenucmd[] = {"dmenu_run", "-fn", dmenufont, "-nb",
 /* static const char *roficmd[] = { "/home/walter/.dwm/rofi/launchers/type-3/launcher.sh", NULL}; */
 static const char *powercmd[] = { "/home/walter/.config/wscripts/powermenu", NULL};
 static const char *termcmd[] = {"st", NULL};
+static const char *nemocmd[] = {"nemo", NULL};
 static const char *browsercmd[] = {"google-chrome-stable", NULL};
+static const char *clipcmd[] = {"clipmenu", "-nb", "#0D1321", "-sb", "#3e5c76",
+                                "-nf", "#ffffff", "-sf", "#ffffff", "-fn",
+                                dmenufont, NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_r, spawn, {.v = dmenucmd}},
     {MODKEY, XK_x, spawn, {.v = powercmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
+    {MODKEY, XK_g, spawn, {.v = browsercmd}},
+    {MODKEY, XK_y, spawn, {.v = clipcmd}},
+    {MODKEY, XK_e, spawn, {.v = nemocmd}},
     {MODKEY, XK_b, togglebar, {0}},
     {MODKEY, XK_j, focusstack, {.i = +1}},
     {MODKEY, XK_k, focusstack, {.i = -1}},
@@ -117,7 +124,7 @@ static const Key keys[] = {
     {MODKEY, XK_l, setmfact, {.f = +0.05}},
     {MODKEY, XK_s, zoom, {0}},
     /* {MODKEY, XK_Tab, view, {0}}, */
-    {MODKEY | ShiftMask, XK_c, killclient, {0}},
+    {MODKEY, XK_q, killclient, {0}},
     {MODKEY, XK_t, setlayout, {.v = &layouts[0]}}, // Tile
     {MODKEY, XK_f, setlayout, {.v = &layouts[1]}}, // NULL
     {MODKEY, XK_m, setlayout, {.v = &layouts[2]}}, // Monocle

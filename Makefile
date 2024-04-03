@@ -6,7 +6,7 @@ include config.mk
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 
-all: options dwm status
+all: options dwm status clipboard
 
 options:
 	@echo dwm build options:
@@ -29,6 +29,9 @@ dwm: ${OBJ}
 status:
 	gcc dwmstatus.c -lX11 -o dwmstatus
 
+clipboard:
+	${CC} ${CFLAGS} ${LDFLAGS} clipnotify.c -o clipnotify -I/usr/X11R6/include -L/usr/X11R6/lib -lX11 -lXfixes
+
 clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz dwmstatus
 
@@ -39,6 +42,7 @@ dist: clean
 	tar -cf dwm-${VERSION}.tar dwm-${VERSION}
 	gzip dwm-${VERSION}.tar
 	rm -rf dwm-${VERSION}
+	rm dwmstatus clipnotify
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
@@ -47,7 +51,9 @@ install: all
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
-	mv dwmstatus /usr/local/bin/dwmstatus
+	mv -v dwmstatus /usr/local/bin/dwmstatus
+	mv -v clipnotify /usr/local/bin/clipnotify
+	cp -v clipmenu/* /usr/local/bin/
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
